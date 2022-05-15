@@ -38,29 +38,6 @@
         android:orientation="vertical" >
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
-            android:id="@+id/description_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-            app:mtv_mode="floatingLabel"
-            app:mtv_floatingLabelText="@string/hint_description"
-            app:mtv_leftIcon="@drawable/ic_format_align_left_black_24dp"
-            app:mtv_bottomLineEnabled="true"
-            tools:text="Description here" />
-
-        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
-            android:id="@+id/date_time_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-            android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
-            app:mtv_mode="floatingLabel"
-            app:mtv_floatingLabelText="@string/hint_date"
-            app:mtv_leftIcon="@drawable/ic_today_black_24dp"
-            app:mtv_bottomLineEnabled="true"
-            tools:text="DateTime here" />
-
-        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/wallet_from_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +62,31 @@
             tools:text="Wallet to here" />
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
+            android:id="@+id/description_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+            app:mtv_mode="floatingLabel"
+            app:mtv_floatingLabelText="@string/hint_description"
+            app:mtv_leftIcon="@drawable/ic_format_align_left_black_24dp"
+            app:mtv_bottomLineEnabled="true"
+            tools:text="Description here" />
+
+        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
+            android:id="@+id/date_time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+            android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
+            app:mtv_mode="floatingLabel"
+            app:mtv_floatingLabelText="@string/hint_date"
+            app:mtv_leftIcon="@drawable/ic_today_black_24dp"
+            app:mtv_bottomLineEnabled="true"
+            tools:text="DateTime here" />
+
+        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/tax_text_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
@@ -98,6 +99,7 @@
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/event_text_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
@@ -110,6 +112,7 @@
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/people_text_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
@@ -122,6 +125,7 @@
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/place_text_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
@@ -134,6 +138,7 @@
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/note_text_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
