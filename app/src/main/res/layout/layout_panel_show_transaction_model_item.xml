@@ -74,7 +74,6 @@
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/event_text_view"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
