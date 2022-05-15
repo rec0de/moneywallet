@@ -38,15 +38,16 @@
         android:orientation="vertical" >
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
-            android:id="@+id/type_text_view"
+            android:id="@+id/wallets_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+            android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
             app:mtv_mode="floatingLabel"
-            app:mtv_floatingLabelText="@string/hint_type"
-            app:mtv_leftIcon="@drawable/ic_label_outline_black_24dp"
+            app:mtv_floatingLabelText="@string/hint_wallets"
+            app:mtv_leftIcon="@drawable/ic_folder_black_24dp"
             app:mtv_bottomLineEnabled="true"
-            tools:text="Budget type here" />
+            tools:text="Wallet names here" />
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/category_text_view"
@@ -59,6 +60,17 @@
             app:mtv_leftIcon="@drawable/ic_table_large_24dp"
             app:mtv_bottomLineEnabled="true"
             tools:text="Category name here" />
+
+        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
+            android:id="@+id/type_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+            app:mtv_mode="floatingLabel"
+            app:mtv_floatingLabelText="@string/hint_type"
+            app:mtv_leftIcon="@drawable/ic_label_outline_black_24dp"
+            app:mtv_bottomLineEnabled="true"
+            tools:text="Budget type here" />
 
         <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
             android:id="@+id/start_date_text_view"
@@ -83,18 +95,6 @@
             app:mtv_leftIcon="@drawable/ic_calendar_black_24dp"
             app:mtv_bottomLineEnabled="true"
             tools:text="End date here" />
-
-        <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialTextView
-            android:id="@+id/wallets_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-            android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
-            app:mtv_mode="floatingLabel"
-            app:mtv_floatingLabelText="@string/hint_wallets"
-            app:mtv_leftIcon="@drawable/ic_folder_black_24dp"
-            app:mtv_bottomLineEnabled="true"
-            tools:text="Wallet names here" />
 
     </LinearLayout>
 

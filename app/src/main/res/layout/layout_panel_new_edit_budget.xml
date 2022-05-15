@@ -28,14 +28,14 @@
     tools:orientation="vertical" >
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/type_edit_text"
+        android:id="@+id/wallets_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-        android:hint="@string/hint_type"
-        android:inputType="textNoSuggestions"
+        android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
+        android:hint="@string/hint_wallets"
+        android:inputType="textMultiLine"
         app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_label_outline_black_24dp" />
+        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/category_edit_text"
@@ -45,6 +45,16 @@
         android:inputType="textNoSuggestions"
         app:met_mode="floatingLabel"
         app:met_leftIcon="@drawable/ic_table_large_24dp" />
+
+    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
+        android:id="@+id/type_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+        android:hint="@string/hint_type"
+        android:inputType="textNoSuggestions"
+        app:met_mode="floatingLabel"
+        app:met_leftIcon="@drawable/ic_label_outline_black_24dp" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/start_date_edit_text"
@@ -63,15 +73,5 @@
         android:inputType="textNoSuggestions"
         app:met_mode="floatingLabel"
         app:met_leftIcon="@drawable/ic_calendar_black_24dp" />
-
-    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/wallets_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
-        android:hint="@string/hint_wallets"
-        android:inputType="textMultiLine"
-        app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
 
 </merge>
