@@ -23,10 +23,11 @@ buildscript {
     
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -35,30 +36,29 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
     }
 }
 
 ext {
-    versions = [
-            supportLib: "27.1.1"
-    ]
     supportDependencies = [
-            appcompat : 'androidx.appcompat:appcompat:1.0.0',
-            recyclerview : 'androidx.recyclerview:recyclerview:1.0.0',
+            appcompat: 'androidx.appcompat:appcompat:1.5.1',
+            recyclerview: 'androidx.recyclerview:recyclerview:1.2.1',
             cardview: 'androidx.cardview:cardview:1.0.0',
-            annotations : 'androidx.annotation:annotation:1.0.0',
-            design : 'com.google.android.material:material:1.0.0',
-            preference: 'androidx.preference:preference:1.0.0',
-            constraintlayout : 'androidx.constraintlayout:constraintlayout:1.1.3'
+            annotations: 'androidx.annotation:annotation:1.5.0',
+            design: 'com.google.android.material:material:1.6.1',
+            preference: 'androidx.preference:preference:1.2.0',
+            constraintlayout: 'androidx.constraintlayout:constraintlayout:2.1.4',
+            workruntime: 'androidx.work:work-runtime:2.7.1'
     ]
     googlePlayServices = [
-            auth: "com.google.android.gms:play-services-auth:15.0.1",
-            signin: "com.google.android.gms:play-services-identity:15.0.1",
-            location: "com.google.android.gms:play-services-location:15.0.1",
-            places: "com.google.android.gms:play-services-places:15.0.1",
-            drive: "com.google.android.gms:play-services-drive:15.0.1"
+            auth: "com.google.android.gms:play-services-auth:20.3.0",
+            signin: "com.google.android.gms:play-services-identity:18.0.1",
+            location: "com.google.android.gms:play-services-location:21.0.0",
+            places: "com.google.android.gms:play-services-places:17.0.0",
+            drive: "com.google.android.gms:play-services-drive:17.0.0"
     ]
 }
 

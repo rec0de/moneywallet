@@ -22,8 +22,6 @@ package com.oriondev.moneywallet;
 import android.app.Application;
 import android.content.Context;
 
-import androidx.multidex.MultiDex;
-
 import com.oriondev.moneywallet.broadcast.AutoBackupBroadcastReceiver;
 import com.oriondev.moneywallet.broadcast.DailyBroadcastReceiver;
 import com.oriondev.moneywallet.broadcast.RecurrenceBroadcastReceiver;
@@ -63,7 +61,6 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
         Reflection.unseal(base);
     }
 }
