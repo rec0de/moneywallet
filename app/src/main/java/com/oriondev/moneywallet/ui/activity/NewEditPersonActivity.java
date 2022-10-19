@@ -93,9 +93,9 @@ public class NewEditPersonActivity extends NewEditItemActivity implements IconPi
                 Cursor cursor = contentResolver.query(uri, projection, null, null, null);
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
-                        mNameEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Person.NAME)));
-                        icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Person.ICON)));
-                        mNoteEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Person.NOTE)));
+                        mNameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.NAME)));
+                        icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.ICON)));
+                        mNoteEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.NOTE)));
                     }
                     cursor.close();
                 }

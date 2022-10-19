@@ -64,13 +64,13 @@ public class TransferModelCursorAdapter extends AbstractCursorAdapter<TransferMo
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.TransferModel.ID);
-        mIndexWalletFromName = cursor.getColumnIndex(Contract.TransferModel.WALLET_FROM_NAME);
-        mIndexWalletFromCurrency = cursor.getColumnIndex(Contract.TransferModel.WALLET_FROM_CURRENCY);
-        mIndexWalletToName = cursor.getColumnIndex(Contract.TransferModel.WALLET_TO_NAME);
-        mIndexWalletToIcon = cursor.getColumnIndex(Contract.TransferModel.WALLET_TO_ICON);
-        mIndexMoneyFrom = cursor.getColumnIndex(Contract.TransferModel.MONEY_FROM);
-        mIndexMoneyTax = cursor.getColumnIndex(Contract.TransferModel.MONEY_TAX);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.TransferModel.ID);
+        mIndexWalletFromName = cursor.getColumnIndexOrThrow(Contract.TransferModel.WALLET_FROM_NAME);
+        mIndexWalletFromCurrency = cursor.getColumnIndexOrThrow(Contract.TransferModel.WALLET_FROM_CURRENCY);
+        mIndexWalletToName = cursor.getColumnIndexOrThrow(Contract.TransferModel.WALLET_TO_NAME);
+        mIndexWalletToIcon = cursor.getColumnIndexOrThrow(Contract.TransferModel.WALLET_TO_ICON);
+        mIndexMoneyFrom = cursor.getColumnIndexOrThrow(Contract.TransferModel.MONEY_FROM);
+        mIndexMoneyTax = cursor.getColumnIndexOrThrow(Contract.TransferModel.MONEY_TAX);
     }
 
     @Override

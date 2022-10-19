@@ -218,11 +218,11 @@ public class NewEditEventActivity extends NewEditItemActivity implements IconPic
             Cursor cursor = contentResolver.query(uri, projection, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
-                    name = cursor.getString(cursor.getColumnIndex(Contract.Event.NAME));
-                    icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Event.ICON)));
-                    startDate = DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndex(Contract.Event.START_DATE)));
-                    endDate = DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndex(Contract.Event.END_DATE)));
-                    mNoteEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Event.NOTE)));
+                    name = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.NAME));
+                    icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.ICON)));
+                    startDate = DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.START_DATE)));
+                    endDate = DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.END_DATE)));
+                    mNoteEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.NOTE)));
                 }
                 cursor.close();
             }

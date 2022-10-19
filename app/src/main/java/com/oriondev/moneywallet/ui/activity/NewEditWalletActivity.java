@@ -167,12 +167,12 @@ public class NewEditWalletActivity extends NewEditItemActivity implements IconPi
             Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 if (cursor.moveToFirst()) {
-                    mNameEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Wallet.NAME)));
-                    icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Wallet.ICON)));
-                    currencyUnit = CurrencyManager.getCurrency(cursor.getString(cursor.getColumnIndex(Contract.Wallet.CURRENCY)));
-                    startMoney = cursor.getLong(cursor.getColumnIndex(Contract.Wallet.START_MONEY));
-                    mNotExcludeTotalCheckBox.setChecked(cursor.getInt(cursor.getColumnIndex(Contract.Wallet.COUNT_IN_TOTAL)) == 1);
-                    mNoteEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Wallet.NOTE)));
+                    mNameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Wallet.NAME)));
+                    icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Wallet.ICON)));
+                    currencyUnit = CurrencyManager.getCurrency(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Wallet.CURRENCY)));
+                    startMoney = cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Wallet.START_MONEY));
+                    mNotExcludeTotalCheckBox.setChecked(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Wallet.COUNT_IN_TOTAL)) == 1);
+                    mNoteEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Wallet.NOTE)));
                     loadComplete = true;
                 }
                 cursor.close();

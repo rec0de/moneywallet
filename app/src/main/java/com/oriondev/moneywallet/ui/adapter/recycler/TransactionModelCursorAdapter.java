@@ -63,13 +63,13 @@ public class TransactionModelCursorAdapter extends AbstractCursorAdapter<Transac
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.TransactionModel.ID);
-        mIndexCategoryName = cursor.getColumnIndex(Contract.TransactionModel.CATEGORY_NAME);
-        mIndexCategoryIcon = cursor.getColumnIndex(Contract.TransactionModel.CATEGORY_ICON);
-        mIndexWalletCurrency = cursor.getColumnIndex(Contract.TransactionModel.WALLET_CURRENCY);
-        mIndexDirection = cursor.getColumnIndex(Contract.TransactionModel.DIRECTION);
-        mIndexMoney = cursor.getColumnIndex(Contract.TransactionModel.MONEY);
-        mIndexDescription = cursor.getColumnIndex(Contract.TransactionModel.DESCRIPTION);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.TransactionModel.ID);
+        mIndexCategoryName = cursor.getColumnIndexOrThrow(Contract.TransactionModel.CATEGORY_NAME);
+        mIndexCategoryIcon = cursor.getColumnIndexOrThrow(Contract.TransactionModel.CATEGORY_ICON);
+        mIndexWalletCurrency = cursor.getColumnIndexOrThrow(Contract.TransactionModel.WALLET_CURRENCY);
+        mIndexDirection = cursor.getColumnIndexOrThrow(Contract.TransactionModel.DIRECTION);
+        mIndexMoney = cursor.getColumnIndexOrThrow(Contract.TransactionModel.MONEY);
+        mIndexDescription = cursor.getColumnIndexOrThrow(Contract.TransactionModel.DESCRIPTION);
     }
 
     @Override

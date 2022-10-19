@@ -58,9 +58,9 @@ public class CategorySortCursorAdapter extends AbstractCursorAdapter<CategorySor
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexCategoryId = cursor.getColumnIndex(Contract.Category.ID);
-        mIndexCategoryIcon = cursor.getColumnIndex(Contract.Category.ICON);
-        mIndexCategoryName = cursor.getColumnIndex(Contract.Category.NAME);
+        mIndexCategoryId = cursor.getColumnIndexOrThrow(Contract.Category.ID);
+        mIndexCategoryIcon = cursor.getColumnIndexOrThrow(Contract.Category.ICON);
+        mIndexCategoryName = cursor.getColumnIndexOrThrow(Contract.Category.NAME);
     }
 
     @Override

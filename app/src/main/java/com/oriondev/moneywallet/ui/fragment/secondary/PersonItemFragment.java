@@ -173,10 +173,10 @@ public class PersonItemFragment extends SecondaryPanelFragment implements Loader
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.moveToFirst()) {
-            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Person.ICON)));
+            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.ICON)));
             IconLoader.loadInto(icon, mAvatarImageView);
-            mNameTextView.setText(cursor.getString(cursor.getColumnIndex(Contract.Person.NAME)));
-            String note = cursor.getString(cursor.getColumnIndex(Contract.Person.NOTE));
+            mNameTextView.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.NAME)));
+            String note = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Person.NOTE));
             if (!TextUtils.isEmpty(note)) {
                 mNoteTextView.setText(note);
                 mNoteTextView.setVisibility(View.VISIBLE);

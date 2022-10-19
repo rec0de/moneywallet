@@ -58,11 +58,11 @@ public class EventSelectorCursorAdapter extends AbstractCursorAdapter<EventSelec
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.Event.ID);
-        mIndexIcon = cursor.getColumnIndex(Contract.Event.ICON);
-        mIndexName = cursor.getColumnIndex(Contract.Event.NAME);
-        mIndexStartDate = cursor.getColumnIndex(Contract.Event.START_DATE);
-        mIndexEndDate = cursor.getColumnIndex(Contract.Event.END_DATE);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Event.ID);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Event.ICON);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Event.NAME);
+        mIndexStartDate = cursor.getColumnIndexOrThrow(Contract.Event.START_DATE);
+        mIndexEndDate = cursor.getColumnIndexOrThrow(Contract.Event.END_DATE);
     }
 
     @Override

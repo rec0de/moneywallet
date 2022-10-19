@@ -77,20 +77,20 @@ public class DebtCursorAdapter extends AbstractCursorAdapter {
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexType = cursor.getColumnIndex(DebtHeaderCursor.COLUMN_ITEM_TYPE);
-        mIndexHeaderType = cursor.getColumnIndex(DebtHeaderCursor.COLUMN_HEADER_TYPE);
-        mIndexHeaderMoney = cursor.getColumnIndex(DebtHeaderCursor.COLUMN_HEADER_MONEY);
-        mIndexId = cursor.getColumnIndex(Contract.Debt.ID);
-        mIndexDebtType = cursor.getColumnIndex(Contract.Debt.TYPE);
-        mIndexIcon = cursor.getColumnIndex(Contract.Debt.ICON);
-        mIndexDescription = cursor.getColumnIndex(Contract.Debt.DESCRIPTION);
-        mIndexMoney = cursor.getColumnIndex(Contract.Debt.MONEY);
-        mIndexProgress = cursor.getColumnIndex(Contract.Debt.PROGRESS);
-        mIndexCurrency = cursor.getColumnIndex(Contract.Debt.WALLET_CURRENCY);
-        mIndexExpirationDate = cursor.getColumnIndex(Contract.Debt.EXPIRATION_DATE);
-        mIndexArchived = cursor.getColumnIndex(Contract.Debt.ARCHIVED);
-        mIndexPlaceId = cursor.getColumnIndex(Contract.Debt.PLACE_ID);
-        mIndexPlaceName = cursor.getColumnIndex(Contract.Debt.PLACE_NAME);
+        mIndexType = cursor.getColumnIndexOrThrow(DebtHeaderCursor.COLUMN_ITEM_TYPE);
+        mIndexHeaderType = cursor.getColumnIndexOrThrow(DebtHeaderCursor.COLUMN_HEADER_TYPE);
+        mIndexHeaderMoney = cursor.getColumnIndexOrThrow(DebtHeaderCursor.COLUMN_HEADER_MONEY);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Debt.ID);
+        mIndexDebtType = cursor.getColumnIndexOrThrow(Contract.Debt.TYPE);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Debt.ICON);
+        mIndexDescription = cursor.getColumnIndexOrThrow(Contract.Debt.DESCRIPTION);
+        mIndexMoney = cursor.getColumnIndexOrThrow(Contract.Debt.MONEY);
+        mIndexProgress = cursor.getColumnIndexOrThrow(Contract.Debt.PROGRESS);
+        mIndexCurrency = cursor.getColumnIndexOrThrow(Contract.Debt.WALLET_CURRENCY);
+        mIndexExpirationDate = cursor.getColumnIndexOrThrow(Contract.Debt.EXPIRATION_DATE);
+        mIndexArchived = cursor.getColumnIndexOrThrow(Contract.Debt.ARCHIVED);
+        mIndexPlaceId = cursor.getColumnIndexOrThrow(Contract.Debt.PLACE_ID);
+        mIndexPlaceName = cursor.getColumnIndexOrThrow(Contract.Debt.PLACE_NAME);
     }
 
     @Override

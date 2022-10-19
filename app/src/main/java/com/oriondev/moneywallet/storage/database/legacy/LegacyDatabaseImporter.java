@@ -228,7 +228,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
         Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                systemCategoryId = cursor.getLong(cursor.getColumnIndex(Contract.Category.ID));
+                systemCategoryId = cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Category.ID));
             }
             cursor.close();
         }
@@ -636,21 +636,21 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
                 transaction.mRecurrence = mCacheRecurrences.get(getLongSafely(cursor, LegacyDatabaseSchema.Transaction.RECURRENCE));
                 transaction.mConfirmed = true;
                 transaction.mCountInTotal = true;
-                if (!cursor.isNull(cursor.getColumnIndex(LegacyDatabaseSchema.Transaction.DEBT))) {
+                if (!cursor.isNull(cursor.getColumnIndexOrThrow(LegacyDatabaseSchema.Transaction.DEBT))) {
                     transaction.mDebt = mCacheDebt.get(getLongSafely(cursor, LegacyDatabaseSchema.Transaction.DEBT));
                     if (transaction.mDebt != null) {
                         transaction.mType = Contract.TransactionType.DEBT;
                     } else {
                         transaction.mType = Contract.TransactionType.STANDARD;
                     }
-                } else if (!cursor.isNull(cursor.getColumnIndex(LegacyDatabaseSchema.Transaction.SAVING))) {
+                } else if (!cursor.isNull(cursor.getColumnIndexOrThrow(LegacyDatabaseSchema.Transaction.SAVING))) {
                     transaction.mSaving = mCacheSaving.get(getLongSafely(cursor, LegacyDatabaseSchema.Transaction.SAVING));
                     if (transaction.mSaving != null) {
                         transaction.mType = Contract.TransactionType.SAVING;
                     } else {
                         transaction.mType = Contract.TransactionType.STANDARD;
                     }
-                } else if (!cursor.isNull(cursor.getColumnIndex(LegacyDatabaseSchema.Transaction.TRANSFER))) {
+                } else if (!cursor.isNull(cursor.getColumnIndexOrThrow(LegacyDatabaseSchema.Transaction.TRANSFER))) {
                     transaction.mType = Contract.TransactionType.TRANSFER;
                 } else {
                     transaction.mType = Contract.TransactionType.STANDARD;
@@ -772,7 +772,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     private String getIconSafely(Cursor cursor, String columnName, String name) {
         /*
         if (columnName != null) {
-            int index = cursor.getColumnIndex(columnName);
+            int index = cursor.getColumnIndexOrThrow(columnName);
             if (index >= 0) {
                 String legacyIcon = cursor.getString(index);
                 Icon icon = LegacyIconMapper.getLegacyIcon(legacyIcon, name);
@@ -789,7 +789,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     }
 
     private String getDateTimeSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         if (index >= 0) {
             return cursor.getString(index) + " 00:00:00";
         }
@@ -797,7 +797,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     }
 
     private String getStringSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         if (index >= 0) {
             return cursor.getString(index);
         }
@@ -805,7 +805,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     }
 
     private int getIntSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         if (index >= 0) {
             return cursor.getInt(index);
         }
@@ -813,7 +813,7 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     }
 
     private long getLongSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         if (index >= 0) {
             return cursor.getLong(index);
         }
@@ -821,12 +821,12 @@ public class LegacyDatabaseImporter implements DatabaseImporter {
     }
 
     private boolean getBooleanSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         return index >= 0 && cursor.getInt(index) == 1;
     }
 
     private Double getDoubleObjSafely(Cursor cursor, String columnName) {
-        int index = cursor.getColumnIndex(columnName);
+        int index = cursor.getColumnIndexOrThrow(columnName);
         if (index >= 0 && !cursor.isNull(index)) {
             return cursor.getDouble(index);
         }

@@ -56,10 +56,10 @@ public class CurrencyCursorAdapter extends AbstractCursorAdapter<CurrencyCursorA
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexIso = cursor.getColumnIndex(Contract.Currency.ISO);
-        mIndexName = cursor.getColumnIndex(Contract.Currency.NAME);
-        mIndexSymbol = cursor.getColumnIndex(Contract.Currency.SYMBOL);
-        mIndexFavourite = cursor.getColumnIndex(Contract.Currency.FAVOURITE);
+        mIndexIso = cursor.getColumnIndexOrThrow(Contract.Currency.ISO);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Currency.NAME);
+        mIndexSymbol = cursor.getColumnIndexOrThrow(Contract.Currency.SYMBOL);
+        mIndexFavourite = cursor.getColumnIndexOrThrow(Contract.Currency.FAVOURITE);
     }
 
     @Override

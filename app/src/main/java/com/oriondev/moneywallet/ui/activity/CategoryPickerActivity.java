@@ -107,10 +107,10 @@ public class CategoryPickerActivity extends SinglePanelViewPagerActivity impleme
             Category category = null;
             if (cursor.moveToFirst()) {
                 category = new Category(
-                        cursor.getLong(cursor.getColumnIndex(Contract.Category.ID)),
-                        cursor.getString(cursor.getColumnIndex(Contract.Category.NAME)),
-                        IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Category.ICON))),
-                        Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndex(Contract.Category.TYPE)))
+                        cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Category.ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.NAME)),
+                        IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.ICON))),
+                        Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.TYPE)))
                 );
             }
             cursor.close();
