@@ -24,9 +24,9 @@ android {
     defaultConfig {
         applicationId "com.oriondev.moneywallet"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 32
         versionCode 75
-        versionName "4.0.5.10"
+        versionName "4.0.5.10-Debug"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
         multiDexEnabled true
@@ -63,6 +63,9 @@ android {
         osm {
             dimension "map"
         }
+    }
+    lintOptions {
+        abortOnError false
     }
     // test libraries
     useLibrary 'android.test.runner'

@@ -127,13 +127,13 @@ public class LocalFilePicker extends Fragment {
             if (isPermissionGranted(activity)) {
                 startPicker(activity);
             } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
+                requestPermissions(new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
             }
         }
     }
 
     private boolean isPermissionGranted(Context context) {
-        String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        String permission = Manifest.permission.MANAGE_EXTERNAL_STORAGE;
         int result = ContextCompat.checkSelfPermission(context, permission);
         return result == PackageManager.PERMISSION_GRANTED;
     }
@@ -173,7 +173,7 @@ public class LocalFilePicker extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION) {
-            if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (permissions[0].equals(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startPicker(getActivity());
             }
