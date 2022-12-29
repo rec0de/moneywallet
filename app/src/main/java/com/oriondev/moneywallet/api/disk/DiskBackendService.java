@@ -19,9 +19,13 @@
 
 package com.oriondev.moneywallet.api.disk;
 
+import static android.os.Build.VERSION.SDK_INT;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Environment;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -70,9 +74,15 @@ public class DiskBackendService extends AbstractBackendServiceDelegate {
 
     @Override
     public boolean isServiceEnabled(Context context) {
-        String permission = Manifest.permission.MANAGE_EXTERNAL_STORAGE;
-        int result = ContextCompat.checkSelfPermission(context, permission);
-        return result == PackageManager.PERMISSION_GRANTED;
+        if(SDK_INT >= Build.VERSION_CODES.R){
+            return Environment.isExternalStorageManager();
+        }else {
+            String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            String permission1 = Manifest.permission.READ_EXTERNAL_STORAGE;
+            int result = ContextCompat.checkSelfPermission(context, permission);
+            int result1 = ContextCompat.checkSelfPermission(context, permission1);
+            return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     @Override
@@ -93,7 +103,25 @@ public class DiskBackendService extends AbstractBackendServiceDelegate {
                     }
                 }
         );
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE)) {
+        if(SDK_INT >= Build.VERSION_CODES.R){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE)) {
+                ThemedDialog.buildMaterialDialog(activity)
+                        .title(R.string.title_request_permission)
+                        .content(R.string.message_permission_required_external_storage)
+                        .positiveText(android.R.string.ok)
+                        .negativeText(android.R.string.cancel)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                launcher.launch(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+                            }
+
+                        }).show();
+            }else{
+                launcher.launch(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+            }
+        } else if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             ThemedDialog.buildMaterialDialog(activity)
                     .title(R.string.title_request_permission)
                     .content(R.string.message_permission_required_external_storage)
@@ -103,12 +131,12 @@ public class DiskBackendService extends AbstractBackendServiceDelegate {
 
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            launcher.launch(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+                            launcher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                         }
 
                     }).show();
         } else {
-            launcher.launch(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+            launcher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
 
