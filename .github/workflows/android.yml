@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+        path: app/build/outputs/apk/flossGmap/debug/app-floss-gmap-debug.apk
         
     - name: Get the version
       id: get_version
