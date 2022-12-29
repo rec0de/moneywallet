@@ -38,7 +38,6 @@ jobs:
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      
     - name: Create Release and Upload debug APK
       uses: underwindfall/create-release-with-debugapk@v2.0.0
       env: 
