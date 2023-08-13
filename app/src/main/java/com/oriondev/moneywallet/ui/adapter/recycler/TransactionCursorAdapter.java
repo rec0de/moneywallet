@@ -73,19 +73,19 @@ public class TransactionCursorAdapter extends AbstractCursorAdapter<RecyclerView
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexType = cursor.getColumnIndex(TransactionHeaderCursor.COLUMN_ITEM_TYPE);
-        mIndexHeaderStartDate = cursor.getColumnIndex(TransactionHeaderCursor.COLUMN_HEADER_START_DATE);
-        mIndexHeaderEndDate = cursor.getColumnIndex(TransactionHeaderCursor.COLUMN_HEADER_END_DATE);
-        mIndexHeaderMoney = cursor.getColumnIndex(TransactionHeaderCursor.COLUMN_HEADER_MONEY);
-        mIndexHeaderGroupType = cursor.getColumnIndex(TransactionHeaderCursor.COLUMN_HEADER_GROUP_TYPE);
-        mIndexCategoryName = cursor.getColumnIndex(Contract.Transaction.CATEGORY_NAME);
-        mIndexCategoryIcon = cursor.getColumnIndex(Contract.Transaction.CATEGORY_ICON);
-        mIndexTransactionId = cursor.getColumnIndex(Contract.Transaction.ID);
-        mIndexTransactionDirection = cursor.getColumnIndex(Contract.Transaction.DIRECTION);
-        mIndexTransactionDescription = cursor.getColumnIndex(Contract.Transaction.DESCRIPTION);
-        mIndexTransactionDate = cursor.getColumnIndex(Contract.Transaction.DATE);
-        mIndexTransactionMoney = cursor.getColumnIndex(Contract.Transaction.MONEY);
-        mIndexCurrency = cursor.getColumnIndex(Contract.Transaction.WALLET_CURRENCY);
+        mIndexType = cursor.getColumnIndexOrThrow(TransactionHeaderCursor.COLUMN_ITEM_TYPE);
+        mIndexHeaderStartDate = cursor.getColumnIndexOrThrow(TransactionHeaderCursor.COLUMN_HEADER_START_DATE);
+        mIndexHeaderEndDate = cursor.getColumnIndexOrThrow(TransactionHeaderCursor.COLUMN_HEADER_END_DATE);
+        mIndexHeaderMoney = cursor.getColumnIndexOrThrow(TransactionHeaderCursor.COLUMN_HEADER_MONEY);
+        mIndexHeaderGroupType = cursor.getColumnIndexOrThrow(TransactionHeaderCursor.COLUMN_HEADER_GROUP_TYPE);
+        mIndexCategoryName = cursor.getColumnIndexOrThrow(Contract.Transaction.CATEGORY_NAME);
+        mIndexCategoryIcon = cursor.getColumnIndexOrThrow(Contract.Transaction.CATEGORY_ICON);
+        mIndexTransactionId = cursor.getColumnIndexOrThrow(Contract.Transaction.ID);
+        mIndexTransactionDirection = cursor.getColumnIndexOrThrow(Contract.Transaction.DIRECTION);
+        mIndexTransactionDescription = cursor.getColumnIndexOrThrow(Contract.Transaction.DESCRIPTION);
+        mIndexTransactionDate = cursor.getColumnIndexOrThrow(Contract.Transaction.DATE);
+        mIndexTransactionMoney = cursor.getColumnIndexOrThrow(Contract.Transaction.MONEY);
+        mIndexCurrency = cursor.getColumnIndexOrThrow(Contract.Transaction.WALLET_CURRENCY);
     }
 
     @Override

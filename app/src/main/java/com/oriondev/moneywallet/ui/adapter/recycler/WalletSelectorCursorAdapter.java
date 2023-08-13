@@ -60,12 +60,12 @@ public class WalletSelectorCursorAdapter extends AbstractCursorAdapter<WalletSel
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.Wallet.ID);
-        mIndexName = cursor.getColumnIndex(Contract.Wallet.NAME);
-        mIndexIcon = cursor.getColumnIndex(Contract.Wallet.ICON);
-        mIndexCurrency = cursor.getColumnIndex(Contract.Wallet.CURRENCY);
-        mIndexStartMoney = cursor.getColumnIndex(Contract.Wallet.START_MONEY);
-        mIndexTotalMoney = cursor.getColumnIndex(Contract.Wallet.TOTAL_MONEY);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Wallet.ID);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Wallet.NAME);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Wallet.ICON);
+        mIndexCurrency = cursor.getColumnIndexOrThrow(Contract.Wallet.CURRENCY);
+        mIndexStartMoney = cursor.getColumnIndexOrThrow(Contract.Wallet.START_MONEY);
+        mIndexTotalMoney = cursor.getColumnIndexOrThrow(Contract.Wallet.TOTAL_MONEY);
     }
 
     @Override

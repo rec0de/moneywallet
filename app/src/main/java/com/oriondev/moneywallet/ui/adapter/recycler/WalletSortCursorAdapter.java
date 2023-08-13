@@ -58,9 +58,9 @@ public class WalletSortCursorAdapter extends AbstractCursorAdapter<WalletSortCur
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexWalletId = cursor.getColumnIndex(Contract.Wallet.ID);
-        mIndexWalletIcon = cursor.getColumnIndex(Contract.Wallet.ICON);
-        mIndexWalletName = cursor.getColumnIndex(Contract.Wallet.NAME);
+        mIndexWalletId = cursor.getColumnIndexOrThrow(Contract.Wallet.ID);
+        mIndexWalletIcon = cursor.getColumnIndexOrThrow(Contract.Wallet.ICON);
+        mIndexWalletName = cursor.getColumnIndexOrThrow(Contract.Wallet.NAME);
     }
 
     @Override

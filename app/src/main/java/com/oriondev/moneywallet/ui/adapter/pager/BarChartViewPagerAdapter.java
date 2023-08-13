@@ -32,7 +32,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.oriondev.moneywallet.R;
 import com.oriondev.moneywallet.model.CurrencyUnit;
@@ -67,7 +67,7 @@ public class BarChartViewPagerAdapter  extends PagerAdapter {
             xAxis.setCenterAxisLabels(true);
             xAxis.setAxisMinimum(0f);
             xAxis.setAxisMaximum(mData.getPeriodCount());
-            xAxis.setValueFormatter(new IAxisValueFormatter() {
+            xAxis.setValueFormatter(new ValueFormatter() {
 
                 @Override
                 public String getFormattedValue(float value, AxisBase axis) {
@@ -117,7 +117,7 @@ public class BarChartViewPagerAdapter  extends PagerAdapter {
         notifyDataSetChanged();
     }
 
-    private static class IMoneyFormatter implements IAxisValueFormatter, IValueFormatter {
+    private static class IMoneyFormatter extends ValueFormatter implements IAxisValueFormatter {
 
         private final CurrencyUnit mCurrencyUnit;
         private final MoneyFormatter mMoneyFormatter;

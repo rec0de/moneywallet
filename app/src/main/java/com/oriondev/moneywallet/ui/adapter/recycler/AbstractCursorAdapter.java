@@ -42,7 +42,7 @@ public abstract class AbstractCursorAdapter<VH extends RecyclerView.ViewHolder> 
         mCursor = cursor;
         mDataValid = cursor != null;
         mIdColumn = id;
-        mRowIdColumn = mDataValid ? mCursor.getColumnIndex(id) : -1;
+        mRowIdColumn = mDataValid ? mCursor.getColumnIndexOrThrow(id) : -1;
         mDataSetObserver = new NotifyingDataSetObserver();
         if (cursor != null) {
             mCursor.registerDataSetObserver(mDataSetObserver);

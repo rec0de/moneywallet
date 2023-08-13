@@ -256,19 +256,19 @@ public class PlaceItemFragment extends SecondaryPanelFragment implements LoaderM
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.moveToFirst()) {
-            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Place.ICON)));
+            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Place.ICON)));
             IconLoader.loadInto(icon, mAvatarImageView);
-            mNameTextView.setText(cursor.getString(cursor.getColumnIndex(Contract.Place.NAME)));
-            String address = cursor.getString(cursor.getColumnIndex(Contract.Place.ADDRESS));
+            mNameTextView.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Place.NAME)));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Place.ADDRESS));
             if (!TextUtils.isEmpty(address)) {
                 mAddressTextView.setText(address);
             } else {
                 mAddressTextView.setText(R.string.hint_address_unknown);
             }
-            if (!cursor.isNull(cursor.getColumnIndex(Contract.Place.LATITUDE)) && !cursor.isNull(cursor.getColumnIndex(Contract.Place.LONGITUDE))) {
+            if (!cursor.isNull(cursor.getColumnIndexOrThrow(Contract.Place.LATITUDE)) && !cursor.isNull(cursor.getColumnIndexOrThrow(Contract.Place.LONGITUDE))) {
                 mCoordinates = new Coordinates(
-                        cursor.getDouble(cursor.getColumnIndex(Contract.Place.LATITUDE)),
-                        cursor.getDouble(cursor.getColumnIndex(Contract.Place.LONGITUDE))
+                        cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Place.LATITUDE)),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Place.LONGITUDE))
                 );
             } else {
                 mCoordinates = null;

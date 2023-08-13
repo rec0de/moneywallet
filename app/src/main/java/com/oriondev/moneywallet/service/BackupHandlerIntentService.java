@@ -432,7 +432,12 @@ public class BackupHandlerIntentService extends IntentService {
                 Intent retryIntent = new Intent(this, NotificationBroadcastReceiver.class);
                 retryIntent.setAction(NotificationBroadcastReceiver.ACTION_RETRY_BACKUP_CREATION);
                 retryIntent.putExtra(NotificationBroadcastReceiver.ACTION_INTENT_ARGUMENTS, intentArguments);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                    pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_MUTABLE);
+                } else {
+                    pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                }
                 // finish to setup the notification body
                 mNotificationBuilder.setContentText(getString(R.string.notification_content_backup_error_wifi_network));
                 mNotificationBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_content_backup_error_wifi_network)));
@@ -453,7 +458,12 @@ public class BackupHandlerIntentService extends IntentService {
                     Intent retryIntent = new Intent(this, NotificationBroadcastReceiver.class);
                     retryIntent.setAction(NotificationBroadcastReceiver.ACTION_RETRY_BACKUP_CREATION);
                     retryIntent.putExtra(NotificationBroadcastReceiver.ACTION_INTENT_ARGUMENTS, intentArguments);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent pendingIntent = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                        pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_MUTABLE);
+                    } else {
+                        pendingIntent = PendingIntent.getBroadcast(this, 0, retryIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    }
                     // finish to setup the notification body
                     mNotificationBuilder.setContentText(getString(R.string.notification_content_backup_error_backend_recoverable));
                     mNotificationBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_content_backup_error_backend_recoverable)));

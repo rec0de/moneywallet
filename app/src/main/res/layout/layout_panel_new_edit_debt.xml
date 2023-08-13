@@ -28,6 +28,16 @@
     tools:orientation="vertical" >
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
+        android:id="@+id/wallet_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
+        android:hint="@string/hint_wallet"
+        android:inputType="textMultiLine"
+        app:met_mode="floatingLabel"
+        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
+
+    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/description_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,17 +67,8 @@
         app:met_showCancelButton="true" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/wallet_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
-        android:hint="@string/hint_wallet"
-        android:inputType="textMultiLine"
-        app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
-
-    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/people_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
@@ -78,6 +79,7 @@
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/place_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"
@@ -89,6 +91,7 @@
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/note_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"

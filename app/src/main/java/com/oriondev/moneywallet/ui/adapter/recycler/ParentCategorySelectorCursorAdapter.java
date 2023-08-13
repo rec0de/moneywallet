@@ -53,10 +53,10 @@ public class ParentCategorySelectorCursorAdapter extends AbstractCursorAdapter<P
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.Category.ID);
-        mIndexName = cursor.getColumnIndex(Contract.Category.NAME);
-        mIndexIcon = cursor.getColumnIndex(Contract.Category.ICON);
-        mIndexType = cursor.getColumnIndex(Contract.Category.TYPE);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Category.ID);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Category.NAME);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Category.ICON);
+        mIndexType = cursor.getColumnIndexOrThrow(Contract.Category.TYPE);
     }
 
     @Override

@@ -28,14 +28,13 @@
     tools:orientation="vertical" >
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/description_edit_text"
+        android:id="@+id/wallet_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-        android:hint="@string/hint_description"
-        android:inputType="textNoSuggestions"
+        android:hint="@string/hint_wallet"
+        android:inputType="textMultiLine"
         app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_format_align_left_black_24dp" />
+        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/start_money_edit_text"
@@ -45,6 +44,16 @@
         android:inputType="textNoSuggestions"
         app:met_mode="floatingLabel"
         app:met_leftIcon="@drawable/ic_cash_multiple_24dp" />
+
+    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
+        android:id="@+id/description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+        android:hint="@string/hint_description"
+        android:inputType="textNoSuggestions"
+        app:met_mode="floatingLabel"
+        app:met_leftIcon="@drawable/ic_format_align_left_black_24dp" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/expiration_date_edit_text"
@@ -57,16 +66,8 @@
         app:met_showCancelButton="true" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/wallet_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_wallet"
-        android:inputType="textMultiLine"
-        app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_folder_black_24dp" />
-
-    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/note_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/material_activity_body_edit_text_margin_bottom"

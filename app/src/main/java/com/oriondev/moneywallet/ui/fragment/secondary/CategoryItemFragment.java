@@ -209,16 +209,16 @@ public class CategoryItemFragment extends SecondaryPanelFragment implements Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.moveToFirst()) {
-            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Category.ICON)));
+            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.ICON)));
             IconLoader.loadInto(icon, mAvatarImageView);
-            mNameTextView.setText(cursor.getString(cursor.getColumnIndex(Contract.Category.NAME)));
-            if (!cursor.isNull(cursor.getColumnIndex(Contract.Category.PARENT))) {
-                mParentCategoryTextView.setText(cursor.getString(cursor.getColumnIndex(Contract.Category.PARENT_NAME)));
+            mNameTextView.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.NAME)));
+            if (!cursor.isNull(cursor.getColumnIndexOrThrow(Contract.Category.PARENT))) {
+                mParentCategoryTextView.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.PARENT_NAME)));
                 mParentCategoryTextView.setVisibility(View.VISIBLE);
             } else {
                 mParentCategoryTextView.setVisibility(View.GONE);
             }
-            Contract.CategoryType type = Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndex(Contract.Category.TYPE)));
+            Contract.CategoryType type = Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.TYPE)));
             if (type != null) {
                 switch (type) {
                     case INCOME:
@@ -236,7 +236,7 @@ public class CategoryItemFragment extends SecondaryPanelFragment implements Load
             } else {
                 mCategoryTypeRadioGroup.setVisibility(View.GONE);
             }
-            if (cursor.getInt(cursor.getColumnIndex(Contract.Category.SHOW_REPORT)) == 1) {
+            if (cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.SHOW_REPORT)) == 1) {
                 mShowReportCheckBox.setChecked(true);
                 mShowReportCheckBox.setText(R.string.hint_show_category_report_on);
             } else {

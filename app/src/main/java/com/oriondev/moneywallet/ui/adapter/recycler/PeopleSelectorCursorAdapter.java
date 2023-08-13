@@ -52,9 +52,9 @@ public class PeopleSelectorCursorAdapter extends AbstractCursorAdapter<PeopleSel
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.Person.ID);
-        mIndexName = cursor.getColumnIndex(Contract.Person.NAME);
-        mIndexIcon = cursor.getColumnIndex(Contract.Person.ICON);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Person.ID);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Person.NAME);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Person.ICON);
     }
 
     @Override
