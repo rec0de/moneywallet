@@ -28,16 +28,6 @@
     tools:orientation="vertical" >
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
-        android:id="@+id/description_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
-        android:hint="@string/hint_description"
-        android:inputType="textMultiLine"
-        app:met_mode="floatingLabel"
-        app:met_leftIcon="@drawable/ic_format_align_left_black_24dp" />
-
-    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/wallet_from_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +46,18 @@
         app:met_leftIcon="@drawable/ic_folder_black_24dp" />
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
+        android:id="@+id/description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_activity_body_edit_text_margin_top"
+        android:hint="@string/hint_description"
+        android:inputType="textMultiLine"
+        app:met_mode="floatingLabel"
+        app:met_leftIcon="@drawable/ic_format_align_left_black_24dp" />
+
+    <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/money_tax_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_tax"
@@ -76,6 +77,7 @@
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/place_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_place"
@@ -86,6 +88,7 @@
 
     <com.oriondev.moneywallet.ui.view.theme.ThemedMaterialEditText
         android:id="@+id/note_edit_text"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_note"
