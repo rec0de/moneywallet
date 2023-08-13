@@ -191,49 +191,49 @@ public class TransactionModelItemFragment extends SecondaryPanelFragment impleme
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.moveToFirst()) {
-            String iso = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.WALLET_CURRENCY));
+            String iso = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.WALLET_CURRENCY));
             CurrencyUnit currency = CurrencyManager.getCurrency(iso);
             if (currency != null) {
                 mCurrencyTextView.setText(currency.getSymbol());
             } else {
                 mCurrencyTextView.setText("?");
             }
-            long money = cursor.getLong(cursor.getColumnIndex(Contract.TransactionModel.MONEY));
+            long money = cursor.getLong(cursor.getColumnIndexOrThrow(Contract.TransactionModel.MONEY));
             mMoneyTextView.setText(mMoneyFormatter.getNotTintedString(currency, money, MoneyFormatter.CurrencyMode.ALWAYS_HIDDEN));
-            String description = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.DESCRIPTION));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.DESCRIPTION));
             if (!TextUtils.isEmpty(description)) {
                 mDescriptionTextView.setText(description);
                 mDescriptionTextView.setVisibility(View.VISIBLE);
             } else {
                 mDescriptionTextView.setVisibility(View.GONE);
             }
-            String category = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.CATEGORY_NAME));
+            String category = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.CATEGORY_NAME));
             mCategoryTextView.setText(category);
-            String wallet = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.WALLET_NAME));
+            String wallet = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.WALLET_NAME));
             mWalletTextView.setText(wallet);
-            String event = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.EVENT_NAME));
+            String event = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.EVENT_NAME));
             if (!TextUtils.isEmpty(event)) {
                 mEventTextView.setText(event);
                 mEventTextView.setVisibility(View.VISIBLE);
             } else {
                 mEventTextView.setVisibility(View.GONE);
             }
-            String place = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.PLACE_NAME));
+            String place = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.PLACE_NAME));
             if (!TextUtils.isEmpty(place)) {
                 mPlaceTextView.setText(place);
                 mPlaceTextView.setVisibility(View.VISIBLE);
             } else {
                 mPlaceTextView.setVisibility(View.GONE);
             }
-            String note = cursor.getString(cursor.getColumnIndex(Contract.TransactionModel.NOTE));
+            String note = cursor.getString(cursor.getColumnIndexOrThrow(Contract.TransactionModel.NOTE));
             if (!TextUtils.isEmpty(note)) {
                 mNoteTextView.setText(note);
                 mNoteTextView.setVisibility(View.VISIBLE);
             } else {
                 mNoteTextView.setVisibility(View.GONE);
             }
-            mConfirmedCheckBox.setChecked(cursor.getInt(cursor.getColumnIndex(Contract.TransactionModel.CONFIRMED)) == 1);
-            mCountInTotalCheckBox.setChecked(cursor.getInt(cursor.getColumnIndex(Contract.TransactionModel.COUNT_IN_TOTAL)) == 1);
+            mConfirmedCheckBox.setChecked(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.TransactionModel.CONFIRMED)) == 1);
+            mCountInTotalCheckBox.setChecked(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.TransactionModel.COUNT_IN_TOTAL)) == 1);
         } else {
             showItemId(0L);
         }

@@ -181,12 +181,12 @@ public class EventItemFragment extends SecondaryPanelFragment implements LoaderM
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.moveToFirst()) {
-            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Event.ICON)));
+            Icon icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.ICON)));
             IconLoader.loadInto(icon, mAvatarImageView);
-            mNameTextView.setText(cursor.getString(cursor.getColumnIndex(Contract.Event.NAME)));
-            DateFormatter.applyDate(mStartDateTextView, DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndex(Contract.Event.START_DATE))));
-            DateFormatter.applyDate(mEndDateTextView, DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndex(Contract.Event.END_DATE))));
-            String note = cursor.getString(cursor.getColumnIndex(Contract.Event.NOTE));
+            mNameTextView.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.NAME)));
+            DateFormatter.applyDate(mStartDateTextView, DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.START_DATE))));
+            DateFormatter.applyDate(mEndDateTextView, DateUtils.getDateFromSQLDateString(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.END_DATE))));
+            String note = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Event.NOTE));
             if (!TextUtils.isEmpty(note)) {
                 mNoteTextView.setText(note);
                 mNoteTextView.setVisibility(View.VISIBLE);

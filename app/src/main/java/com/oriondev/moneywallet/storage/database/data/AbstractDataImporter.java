@@ -85,7 +85,7 @@ public abstract class AbstractDataImporter {
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    return cursor.getLong(cursor.getColumnIndex(Contract.Wallet.ID));
+                    return cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Wallet.ID));
                 }
             } finally {
                 cursor.close();
@@ -120,7 +120,7 @@ public abstract class AbstractDataImporter {
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    return cursor.getLong(cursor.getColumnIndex(Contract.Category.ID));
+                    return cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Category.ID));
                 }
             } finally {
                 cursor.close();
@@ -151,7 +151,7 @@ public abstract class AbstractDataImporter {
             if (cursor != null) {
                 try {
                     if (cursor.moveToFirst()) {
-                        return cursor.getLong(cursor.getColumnIndex(Contract.Event.ID));
+                        return cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Event.ID));
                     }
                 } finally {
                     cursor.close();
@@ -172,7 +172,7 @@ public abstract class AbstractDataImporter {
             if (cursor != null) {
                 try {
                     if (cursor.moveToFirst()) {
-                        return cursor.getLong(cursor.getColumnIndex(Contract.Place.ID));
+                        return cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Place.ID));
                     }
                 } finally {
                     cursor.close();
@@ -211,7 +211,7 @@ public abstract class AbstractDataImporter {
                         try {
                             if (cursor.moveToFirst()) {
                                 personFound = true;
-                                peopleIds.add(cursor.getLong(cursor.getColumnIndex(Contract.Person.ID)));
+                                peopleIds.add(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Person.ID)));
                             }
                         } finally {
                             cursor.close();

@@ -240,9 +240,9 @@ public class AttachmentPicker extends Fragment {
                     if (cursor.moveToFirst()) {
                         attachment = new Attachment(
                                 0L, Attachment.generateFileUID(),
-                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)),
+                                cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)),
                                 contentResolver.getType(uri),
-                                cursor.getLong(cursor.getColumnIndex(OpenableColumns.SIZE)),
+                                cursor.getLong(cursor.getColumnIndexOrThrow(OpenableColumns.SIZE)),
                                 Attachment.Status.PENDING
                         );
                     }

@@ -154,18 +154,18 @@ public class NewEditCategoryActivity extends NewEditItemActivity implements Icon
                 Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
-                        mNameEditText.setText(cursor.getString(cursor.getColumnIndex(Contract.Category.NAME)));
-                        icon = IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Category.ICON)));
-                        if (!cursor.isNull(cursor.getColumnIndex(Contract.Category.PARENT))) {
+                        mNameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.NAME)));
+                        icon = IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.ICON)));
+                        if (!cursor.isNull(cursor.getColumnIndexOrThrow(Contract.Category.PARENT))) {
                             category = new Category(
-                                    cursor.getLong(cursor.getColumnIndex(Contract.Category.PARENT)),
-                                    cursor.getString(cursor.getColumnIndex(Contract.Category.PARENT_NAME)),
-                                    IconLoader.parse(cursor.getString(cursor.getColumnIndex(Contract.Category.PARENT_ICON))),
-                                    Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndex(Contract.Category.PARENT_TYPE)))
+                                    cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Category.PARENT)),
+                                    cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.PARENT_NAME)),
+                                    IconLoader.parse(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Category.PARENT_ICON))),
+                                    Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.PARENT_TYPE)))
                             );
                         }
-                        type = Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndex(Contract.Category.TYPE)));
-                        mShowReportCheckBox.setChecked(cursor.getInt(cursor.getColumnIndex(Contract.Category.SHOW_REPORT)) == 1);
+                        type = Contract.CategoryType.fromValue(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.TYPE)));
+                        mShowReportCheckBox.setChecked(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Category.SHOW_REPORT)) == 1);
                         mIsSystemCategory = type == Contract.CategoryType.SYSTEM;
                     }
                     cursor.close();

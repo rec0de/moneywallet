@@ -5,12 +5,17 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Parcelable;
+import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.oriondev.moneywallet.BuildConfig;
 import com.oriondev.moneywallet.broadcast.LocalAction;
 import com.oriondev.moneywallet.model.DataFormat;
 import com.oriondev.moneywallet.model.Wallet;
@@ -63,6 +68,20 @@ public class ImportExportIntentService extends IntentService {
         if (intent != null) {
             mBroadcastManager = LocalBroadcastManager.getInstance(this);
             int mode = intent.getIntExtra(MODE, MODE_EXPORT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (!Environment.isExternalStorageManager()) {
+                    try {
+                        Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                        Intent rw_intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+                        startActivity(rw_intent);
+                    } catch (Exception ex) {
+                        Intent rw_intent = new Intent();
+                        rw_intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                        startActivity(rw_intent);
+                    }
+                    return;
+                }
+            }
             switch (mode) {
                 case MODE_EXPORT:
                     handleExport(intent);

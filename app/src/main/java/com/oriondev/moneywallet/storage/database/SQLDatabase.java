@@ -190,7 +190,7 @@ import java.util.UUID;
         if (cursor != null) {
             Long categoryId = null;
             if (cursor.moveToFirst()) {
-                categoryId = cursor.getLong(cursor.getColumnIndex(Schema.Category.ID));
+                categoryId = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Category.ID));
             }
             cursor.close();
             return categoryId;
@@ -284,7 +284,7 @@ import java.util.UUID;
         Cursor cursor = getReadableDatabase().query(Schema.Currency.TABLE, projection, selection, selectionArgs, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                oldDecimals = cursor.getInt(cursor.getColumnIndex(Schema.Currency.DECIMALS));
+                oldDecimals = cursor.getInt(cursor.getColumnIndexOrThrow(Schema.Currency.DECIMALS));
             }
             cursor.close();
         }
@@ -337,7 +337,7 @@ import java.util.UUID;
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    long walletId = cursor.getLong(cursor.getColumnIndex(Schema.Wallet.ID));
+                    long walletId = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Wallet.ID));
                     throw new SQLiteDataException(Contract.ErrorCode.CURRENCY_IN_USE,
                             String.format(Locale.ENGLISH, "The currency (iso: %s) cannot be deleted because is in use in wallet (id: %d)", iso, walletId));
                 }
@@ -500,7 +500,7 @@ import java.util.UUID;
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    long transferId = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.ID));
+                    long transferId = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.ID));
                     throw new SQLiteDataException(Contract.ErrorCode.WALLET_USED_IN_TRANSFER,
                             String.format(Locale.ENGLISH, "The wallet (id: %d) cannot be deleted because is in use in a transfer (id: %d)", walletId, transferId));
                 }
@@ -716,7 +716,7 @@ import java.util.UUID;
             Cursor cursor = getReadableDatabase().query(table, projection, selection, selectionArgs, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
-                    String recurrenceUUID = cursor.getString(cursor.getColumnIndex(Schema.RecurrentTransaction.UUID));
+                    String recurrenceUUID = cursor.getString(cursor.getColumnIndexOrThrow(Schema.RecurrentTransaction.UUID));
                     Date date = DateUtils.getDateFromSQLDateTimeString(contentValues.getAsString(Contract.Transaction.DATE));
                     transactionUUID = getRecurrentItemUUID(recurrenceUUID, date);
                     lastEdit = date.getTime();
@@ -848,7 +848,7 @@ import java.util.UUID;
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    long transferId = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.ID));
+                    long transferId = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.ID));
                     throw new SQLiteDataException(Contract.ErrorCode.TRANSACTION_USED_IN_TRANSFER,
                             String.format(Locale.ENGLISH, "The transaction (id: %d) cannot be updated because it is part of a transfer (id: %d)", transactionId, transferId));
                 }
@@ -1004,7 +1004,7 @@ import java.util.UUID;
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    long transferId = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.ID));
+                    long transferId = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.ID));
                     throw new SQLiteDataException(Contract.ErrorCode.TRANSACTION_USED_IN_TRANSFER,
                             String.format(Locale.ENGLISH, "The transaction (id: %d) cannot be deleted because it is part of a transfer (id: %d)", transactionId, transferId));
                 }
@@ -1064,7 +1064,7 @@ import java.util.UUID;
         List<Long> cache = new ArrayList<>();
         try {
             while (cursor.moveToNext()) {
-                cache.add(cursor.getLong(cursor.getColumnIndex(Contract.Transaction.ID)));
+                cache.add(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Transaction.ID)));
             }
         } finally {
             cursor.close();
@@ -1193,10 +1193,10 @@ import java.util.UUID;
         Cursor cursor = getTransfers(projection, selection, selectionArgs, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                transactionIds[0] = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.TRANSACTION_FROM));
-                transactionIds[1] = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.TRANSACTION_TO));
-                if (!cursor.isNull(cursor.getColumnIndex(Schema.Transfer.TRANSACTION_TAX))) {
-                    transactionIds[2] = cursor.getLong(cursor.getColumnIndex(Schema.Transfer.TRANSACTION_TAX));
+                transactionIds[0] = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.TRANSACTION_FROM));
+                transactionIds[1] = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.TRANSACTION_TO));
+                if (!cursor.isNull(cursor.getColumnIndexOrThrow(Schema.Transfer.TRANSACTION_TAX))) {
+                    transactionIds[2] = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transfer.TRANSACTION_TAX));
                 } else {
                     transactionIds[2] = null;
                 }
@@ -1280,7 +1280,7 @@ import java.util.UUID;
             Cursor cursor = getReadableDatabase().query(table, projection, selection, selectionArgs, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
-                    String recurrenceUUID = cursor.getString(cursor.getColumnIndex(Schema.RecurrentTransfer.UUID));
+                    String recurrenceUUID = cursor.getString(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.UUID));
                     Date date = DateUtils.getDateFromSQLDateTimeString(contentValues.getAsString(Contract.Transfer.DATE));
                     transferUUID = getRecurrentItemUUID(recurrenceUUID, date);
                     lastEdit = date.getTime();
@@ -1749,12 +1749,12 @@ import java.util.UUID;
                 try {
                     if (cursor.moveToFirst()) {
                         // check if category that is set has parent is already a child category
-                        if (cursor.getLong(cursor.getColumnIndex(Schema.Category.PARENT)) > 0L) {
+                        if (cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Category.PARENT)) > 0L) {
                             throw new SQLiteDataException(Contract.ErrorCode.CATEGORY_HIERARCHY_NOT_SUPPORTED,
                                     "The category cannot be inserted because nested relations are not supported");
                         }
                         // check if parent category is consistent with the type of the category
-                        if (cursor.getInt(cursor.getColumnIndex(Schema.Category.TYPE)) != contentValues.getAsInteger(Contract.Category.TYPE)) {
+                        if (cursor.getInt(cursor.getColumnIndexOrThrow(Schema.Category.TYPE)) != contentValues.getAsInteger(Contract.Category.TYPE)) {
                             throw new SQLiteDataException(Contract.ErrorCode.CATEGORY_NOT_CONSISTENT,
                                     "The category cannot be inserted because is not consistent with the parent category");
                         }
@@ -1801,10 +1801,10 @@ import java.util.UUID;
         if (cursor != null) {
             try {
                 if (cursor.moveToFirst()) {
-                    if (cursor.getInt(cursor.getColumnIndex(Schema.Category.TYPE)) == Contract.CategoryType.SYSTEM.getValue()) {
+                    if (cursor.getInt(cursor.getColumnIndexOrThrow(Schema.Category.TYPE)) == Contract.CategoryType.SYSTEM.getValue()) {
                         isSystemCategory = true;
                     }
-                    if (!cursor.isNull(cursor.getColumnIndex(Schema.Category.PARENT))) {
+                    if (!cursor.isNull(cursor.getColumnIndexOrThrow(Schema.Category.PARENT))) {
                         isChildCategory = true;
                     }
                 }
@@ -1838,12 +1838,12 @@ import java.util.UUID;
                 try {
                     if (cursor.moveToFirst()) {
                         // check if category that is set has parent is already a child category
-                        if (cursor.getLong(cursor.getColumnIndex(Schema.Category.PARENT)) > 0L) {
+                        if (cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Category.PARENT)) > 0L) {
                             throw new SQLiteDataException(Contract.ErrorCode.CATEGORY_HIERARCHY_NOT_SUPPORTED,
                                     String.format(Locale.ENGLISH, "The category (id: %d) cannot be updated because nested relations are not supported", categoryId));
                         }
                         // check if parent category is consistent with the type of the category
-                        if (cursor.getInt(cursor.getColumnIndex(Schema.Category.TYPE)) != contentValues.getAsInteger(Contract.Category.TYPE)) {
+                        if (cursor.getInt(cursor.getColumnIndexOrThrow(Schema.Category.TYPE)) != contentValues.getAsInteger(Contract.Category.TYPE)) {
                             throw new SQLiteDataException(Contract.ErrorCode.CATEGORY_NOT_CONSISTENT,
                                     String.format(Locale.ENGLISH, "The category (id: %d) cannot be updated because is not consistent with the parent category", categoryId));
                         }
@@ -1963,7 +1963,7 @@ import java.util.UUID;
         cursor = getReadableDatabase().query(Schema.Category.TABLE, projection, where, whereArgs, null, null, null);
         if (cursor != null) {
             try {
-                if (cursor.moveToFirst() && cursor.getInt(cursor.getColumnIndex(Schema.Category.TYPE)) == Contract.CategoryType.SYSTEM.getValue()) {
+                if (cursor.moveToFirst() && cursor.getInt(cursor.getColumnIndexOrThrow(Schema.Category.TYPE)) == Contract.CategoryType.SYSTEM.getValue()) {
                     throw new SQLiteDataException(Contract.ErrorCode.SYSTEM_CATEGORY_NOT_MODIFIABLE,
                             String.format(Locale.ENGLISH, "The category (id: %d) cannot be deleted because it is a system category", categoryId));
                 }
@@ -2342,7 +2342,7 @@ import java.util.UUID;
             Cursor cursor = getTransactions(projection, selection, selectionArgs, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
-                    long transactionId = cursor.getLong(cursor.getColumnIndex(Contract.Transaction.ID));
+                    long transactionId = cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Transaction.ID));
                     cv = new ContentValues();
                     if (contentValues.containsKey(Contract.Debt.MONEY)) {
                         cv.put(Contract.Transaction.MONEY, contentValues.getAsLong(Contract.Debt.MONEY));
@@ -2854,7 +2854,7 @@ import java.util.UUID;
             Cursor cursor = getWallet(walletId, projection);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
-                    String currency = cursor.getString(cursor.getColumnIndex(Contract.Wallet.CURRENCY));
+                    String currency = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Wallet.CURRENCY));
                     if (savedCurrency != null) {
                         if (!TextUtils.equals(savedCurrency, currency)) {
                             String message = String.format(Locale.ENGLISH, "Wallet currency is not consistent (found %s and %s)", savedCurrency, currency);
@@ -4510,8 +4510,8 @@ import java.util.UUID;
             String[] selectionArgs = new String[] {iso};
             Cursor cursor = getWallets(projections, selection, selectionArgs, null);
             if (cursor != null) {
-                int indexId = cursor.getColumnIndex(Contract.Wallet.ID);
-                int indexStartMoney = cursor.getColumnIndex(Contract.Wallet.START_MONEY);
+                int indexId = cursor.getColumnIndexOrThrow(Contract.Wallet.ID);
+                int indexStartMoney = cursor.getColumnIndexOrThrow(Contract.Wallet.START_MONEY);
                 while (cursor.moveToNext()) {
                     long walletId = cursor.getLong(indexId);
                     long startMoney = cursor.getLong(indexStartMoney);
@@ -4541,8 +4541,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.Debt.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.Debt.MONEY));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Debt.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Debt.MONEY));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4564,9 +4564,9 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.Saving.ID));
-                        long startMoney = cursor.getLong(cursor.getColumnIndex(Schema.Saving.START_MONEY));
-                        long endMoney = cursor.getLong(cursor.getColumnIndex(Schema.Saving.END_MONEY));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Saving.ID));
+                        long startMoney = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Saving.START_MONEY));
+                        long endMoney = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Saving.END_MONEY));
                         long fixedStartMoney = MoneyFormatter.normalize(startMoney, decimalOffset);
                         long fixedEndMoney = MoneyFormatter.normalize(endMoney, decimalOffset);
                         // update the row with the fixed money
@@ -4589,8 +4589,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.Transaction.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.Transaction.MONEY));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transaction.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Transaction.MONEY));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4611,8 +4611,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.TransactionModel.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.TransactionModel.MONEY));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransactionModel.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransactionModel.MONEY));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4634,15 +4634,15 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.TransferModel.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.TransferModel.MONEY_FROM));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransferModel.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransferModel.MONEY_FROM));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(Schema.TransferModel.MONEY_FROM, fixedMoney);
                         // check if also the tax should be updated
-                        if (!cursor.isNull(cursor.getColumnIndex(Schema.TransferModel.MONEY_TAX))) {
-                            long moneyTax = cursor.getLong(cursor.getColumnIndex(Schema.TransferModel.MONEY_TAX));
+                        if (!cursor.isNull(cursor.getColumnIndexOrThrow(Schema.TransferModel.MONEY_TAX))) {
+                            long moneyTax = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransferModel.MONEY_TAX));
                             if (moneyTax > 0L) {
                                 long fixedMoneyTax = MoneyFormatter.normalize(moneyTax, decimalOffset);
                                 contentValues.put(Schema.TransferModel.MONEY_TAX, fixedMoneyTax);
@@ -4664,8 +4664,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.TransferModel.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.TransferModel.MONEY_TO));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransferModel.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.TransferModel.MONEY_TO));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4686,8 +4686,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransaction.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransaction.MONEY));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransaction.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransaction.MONEY));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4709,15 +4709,15 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransfer.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransfer.MONEY_FROM));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.MONEY_FROM));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(Schema.RecurrentTransfer.MONEY_FROM, fixedMoney);
                         // check if also the tax should be updated
-                        if (!cursor.isNull(cursor.getColumnIndex(Schema.RecurrentTransfer.MONEY_TAX))) {
-                            long moneyTax = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransfer.MONEY_TAX));
+                        if (!cursor.isNull(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.MONEY_TAX))) {
+                            long moneyTax = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.MONEY_TAX));
                             if (moneyTax > 0L) {
                                 long fixedMoneyTax = MoneyFormatter.normalize(moneyTax, decimalOffset);
                                 contentValues.put(Schema.RecurrentTransfer.MONEY_TAX, fixedMoneyTax);
@@ -4739,8 +4739,8 @@ import java.util.UUID;
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         // extract the current info from the table row
-                        long id = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransfer.ID));
-                        long money = cursor.getLong(cursor.getColumnIndex(Schema.RecurrentTransfer.MONEY_TO));
+                        long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.ID));
+                        long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.RecurrentTransfer.MONEY_TO));
                         long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                         // update the row with the fixed money
                         ContentValues contentValues = new ContentValues();
@@ -4763,8 +4763,8 @@ import java.util.UUID;
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     // extract the current info from the table row
-                    long id = cursor.getLong(cursor.getColumnIndex(Schema.Budget.ID));
-                    long money = cursor.getLong(cursor.getColumnIndex(Schema.Budget.MONEY));
+                    long id = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Budget.ID));
+                    long money = cursor.getLong(cursor.getColumnIndexOrThrow(Schema.Budget.MONEY));
                     long fixedMoney = MoneyFormatter.normalize(money, decimalOffset);
                     // update the row with the fixed money
                     ContentValues contentValues = new ContentValues();

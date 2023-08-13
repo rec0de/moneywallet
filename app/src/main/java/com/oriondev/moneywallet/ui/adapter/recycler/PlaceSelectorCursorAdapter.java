@@ -56,12 +56,12 @@ public class PlaceSelectorCursorAdapter extends AbstractCursorAdapter<PlaceSelec
 
     @Override
     protected void onLoadColumnIndices(@NonNull Cursor cursor) {
-        mIndexId = cursor.getColumnIndex(Contract.Place.ID);
-        mIndexName = cursor.getColumnIndex(Contract.Place.NAME);
-        mIndexIcon = cursor.getColumnIndex(Contract.Place.ICON);
-        mIndexAddress = cursor.getColumnIndex(Contract.Place.ADDRESS);
-        mIndexLatitude = cursor.getColumnIndex(Contract.Place.LATITUDE);
-        mIndexLongitude = cursor.getColumnIndex(Contract.Place.LONGITUDE);
+        mIndexId = cursor.getColumnIndexOrThrow(Contract.Place.ID);
+        mIndexName = cursor.getColumnIndexOrThrow(Contract.Place.NAME);
+        mIndexIcon = cursor.getColumnIndexOrThrow(Contract.Place.ICON);
+        mIndexAddress = cursor.getColumnIndexOrThrow(Contract.Place.ADDRESS);
+        mIndexLatitude = cursor.getColumnIndexOrThrow(Contract.Place.LATITUDE);
+        mIndexLongitude = cursor.getColumnIndexOrThrow(Contract.Place.LONGITUDE);
     }
 
     @Override

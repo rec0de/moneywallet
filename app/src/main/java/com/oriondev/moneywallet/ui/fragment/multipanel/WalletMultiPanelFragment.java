@@ -155,10 +155,10 @@ public class WalletMultiPanelFragment extends MultiPanelAppBarItemFragment imple
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null) {
             Money money = new Money();
-            int indexCurrency = cursor.getColumnIndex(Contract.Wallet.CURRENCY);
-            int indexInTotal = cursor.getColumnIndex(Contract.Wallet.COUNT_IN_TOTAL);
-            int indexWalletInitial = cursor.getColumnIndex(Contract.Wallet.START_MONEY);
-            int indexWalletTotal = cursor.getColumnIndex(Contract.Wallet.TOTAL_MONEY);
+            int indexCurrency = cursor.getColumnIndexOrThrow(Contract.Wallet.CURRENCY);
+            int indexInTotal = cursor.getColumnIndexOrThrow(Contract.Wallet.COUNT_IN_TOTAL);
+            int indexWalletInitial = cursor.getColumnIndexOrThrow(Contract.Wallet.START_MONEY);
+            int indexWalletTotal = cursor.getColumnIndexOrThrow(Contract.Wallet.TOTAL_MONEY);
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 if (cursor.getInt(indexInTotal) == 1) {

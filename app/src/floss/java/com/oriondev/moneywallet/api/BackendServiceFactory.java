@@ -20,7 +20,6 @@
 package com.oriondev.moneywallet.api;
 
 import android.content.Context;
-import android.os.Build;
 
 import com.oriondev.moneywallet.R;
 import com.oriondev.moneywallet.api.disk.DiskBackendService;
@@ -67,9 +66,7 @@ public class BackendServiceFactory {
     public static List<BackupService> getBackupServices() {
         List<BackupService> services = new ArrayList<>();
         services.add(new BackupService(SERVICE_ID_EXTERNAL_MEMORY, R.drawable.ic_sd_24dp, R.string.service_backup_external_memory));
-        if (Build.VERSION.SDK_INT >= 21) {
-            services.add(new BackupService(SERVICE_ID_SAF, R.drawable.ic_storage_black_24dp, R.string.service_backup_storage_access_framework));
-        }
+        services.add(new BackupService(SERVICE_ID_SAF, R.drawable.ic_storage_black_24dp, R.string.service_backup_storage_access_framework));
         return services;
     }
 
