@@ -19,12 +19,19 @@
 
 package com.oriondev.moneywallet.picker;
 
+import static android.os.Build.VERSION.SDK_INT;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -127,15 +134,34 @@ public class LocalFilePicker extends Fragment {
             if (isPermissionGranted(activity)) {
                 startPicker(activity);
             } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
+                if (SDK_INT >= Build.VERSION_CODES.R) {
+                    try {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                        intent.addCategory("android.intent.category.DEFAULT");
+                        intent.setData(Uri.parse(String.format("package:%s", activity.getApplicationContext().getPackageName())));
+                        startActivityForResult(intent, REQUEST_FILE_PICKER);
+                    } catch (Exception e){
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                        startActivityForResult(intent, REQUEST_FILE_PICKER);
+                    }
+                } else {
+                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
+                }
             }
         }
     }
 
     private boolean isPermissionGranted(Context context) {
-        String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-        int result = ContextCompat.checkSelfPermission(context, permission);
-        return result == PackageManager.PERMISSION_GRANTED;
+        if(SDK_INT >= Build.VERSION_CODES.R){
+            return Environment.isExternalStorageManager();
+        }else {
+            String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            String permission1 = Manifest.permission.READ_EXTERNAL_STORAGE;
+            int result = ContextCompat.checkSelfPermission(context, permission);
+            int result1 = ContextCompat.checkSelfPermission(context, permission1);
+            return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     private void startPicker(Context context) {
